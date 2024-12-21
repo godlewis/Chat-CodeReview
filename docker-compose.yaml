@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  chat-codereview:
+    build: .
+    container_name: chat-codereview
+    # 环境变量配置
+    environment:
+      - GITLAB_SERVER_URL=${GITLAB_SERVER_URL}
+      - GITLAB_PRIVATE_TOKEN=${GITLAB_PRIVATE_TOKEN}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - OPENAI_MODEL_NAME=${OPENAI_MODEL_NAME}
+    # 端口映射
+    ports:
+      - "5000:5000"
+    # 持久化配置文件
+    volumes:
+      - ./config:/app/config
+    # 自动重启
+    restart: unless-stopped 

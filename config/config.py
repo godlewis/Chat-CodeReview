@@ -44,7 +44,7 @@ ERROR_VIOLATION_POLICIES = {
 """
 
 WEBHOOK_VERIFY_TOKEN = "asdhiqbryuwfqodwgeayrgfbsifbd"
-gitlab_server_url = gitlab_server_url
+gitlab_server_url = "http://8.218.87.24:8080"
 gitlab_private_token = gitlab_private_token
 openai_api_key = openai_api_key
 openai_baseurl = "https://api.openai.com/v1"
