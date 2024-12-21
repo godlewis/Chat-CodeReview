@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ce:16.9.1-ce.0'
+    restart: always
+    hostname: 'gitlab.example.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://0.0.0.0:80'
+        gitlab_rails['time_zone'] = 'Asia/Shanghai'
+        nginx['listen_https'] = false
+    ports:
+      - '8080:80'
+      - '8443:443'
+      - '8822:22'
+    volumes:
+      - './gitlab/config:/etc/gitlab'
+      - './gitlab/data:/var/opt/gitlab'
+      - './gitlab/logs:/var/log/gitlab'
+volumes:
+  gitlab-config:
+  gitlab-data:
+  gitlab-logs:
+  
