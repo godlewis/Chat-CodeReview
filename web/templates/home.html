@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitLab 代码评审系统</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- 自定义样式 -->
+    <link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- 侧边栏 -->
+        <nav id="sidebar" class="active">
+            <div class="sidebar-header">
+                <img src="{{ url_for('static', filename='images/logo-full.svg') }}" alt="Code Review" class="logo-full">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo-icon.svg') }}" alt="Logo" class="logo-icon">
+                </div>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#" data-page="review">
+                        <i class="bi bi-clipboard-check"></i>
+                        <span>代码评审</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="projects">
+                        <i class="bi bi-folder"></i>
+                        <span>项目列表</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="developers">
+                        <i class="bi bi-people"></i>
+                        <span>开发者列表</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 页面内容 -->
+        <div id="content">
+            <!-- 顶部导航栏 -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    
+                    <div class="ms-2">
+                        <span class="navbar-text" id="currentPageTitle">代码评审</span>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- 主要内容区域 -->
+            <div class="container-fluid content-area">
+                <div id="pageContent">
+                    <!-- 页面内容将通过 JavaScript 动态加载 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.1/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 自定义脚本 -->
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+</body>
+</html> 

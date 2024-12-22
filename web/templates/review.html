@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码评审</title>
+    <!-- 日期选择器样式 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <style>
+        .review-container {
+            padding: 20px;
+        }
+        
+        .date-range {
+            margin-bottom: 20px;
+        }
+        
+        .content-area {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .left-panel {
+            flex: 0 0 300px;
+        }
+        
+        .right-panel {
+            flex: 1;
+        }
+        
+        .progress {
+            height: 20px;
+        }
+        
+        .progress-bar {
+            line-height: 20px;
+            font-size: 12px;
+        }
+        
+        .reviewer-item {
+            cursor: pointer;
+        }
+        
+        .reviewer-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .reviewer-item.active {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="review-container">
+        <!-- 查询条件 -->
+        <div class="date-range">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">查询条件</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">开始时间</label>
+                            <input type="text" class="form-control datepicker" id="startDate">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">结束时间</label>
+                            <input type="text" class="form-control datepicker" id="endDate">
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button class="btn btn-primary" id="searchBtn">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="content-area">
+            <!-- 左侧人员列表 -->
+            <div class="left-panel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">评审人员列表</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush" id="reviewersList">
+                            <!-- 人员列表将通过 JavaScript 动态加载 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧评审列表 -->
+            <div class="right-panel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">评审记录</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>提交人</th>
+                                        <th>项目名称</th>
+                                        <th>提交时间</th>
+                                        <th>新增代码行数</th>
+                                        <th>删除代码行数</th>
+                                        <th>代码质量评分</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reviewList">
+                                    <!-- 评审列表将通过 JavaScript 动态加载 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 报告生成确认模态框 -->
+    <div class="modal fade" id="reportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">生成评审报告</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>确认为以下开发者生成代码评审报告？</p>
+                    <div class="developer-info mb-3">
+                        <!-- 开发者信息将通过 JavaScript 动态填充 -->
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">通知邮箱（可选）</label>
+                        <input type="email" class="form-control" id="notifyEmail">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="generateReportBtn">生成报告</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 在现有模态框后添加提交详情模态框 -->
+    <div class="modal fade" id="commitDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">提交详情</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="commit-info mb-3">
+                        <!-- 提交基本信息将通过 JavaScript 动态填充 -->
+                    </div>
+                    <div class="changes-container">
+                        <!-- 代码变更将通过 JavaScript 动态填充 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 日期选择器脚本 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <!-- XLSX -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- 自定义脚本 -->
+    <script src="{{ url_for('static', filename='js/review.js') }}"></script>
+</body>
+</html> 

@@ -1,0 +1,143 @@
+/* 整体布局 */
+.wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* 侧边栏样式 */
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #343a40;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+.sidebar-header {
+    padding: 20px;
+    background: #2c3136;
+    text-align: center;
+}
+
+.sidebar-header .logo {
+    font-size: 2.5em;
+    margin: 10px 0;
+}
+
+.components {
+    padding: 20px 0;
+}
+
+#sidebar ul li a {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar ul li a:hover {
+    background: #2c3136;
+}
+
+#sidebar ul li.active > a {
+    background: #2c3136;
+}
+
+#sidebar ul ul a {
+    padding-left: 40px !important;
+    background: #2c3136;
+}
+
+/* 主内容区域样式 */
+#content {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+    background: #f8f9fa;
+}
+
+.navbar {
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#sidebarCollapse {
+    background: #343a40;
+    border: none;
+}
+
+#sidebarCollapse:hover {
+    background: #2c3136;
+}
+
+.content-area {
+    padding: 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+
+/* 用户下拉菜单样式 */
+.dropdown-menu {
+    min-width: 200px;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+}
+
+/* 页面标题样式 */
+#currentPageTitle {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+/* 动画效果 */
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 200ms ease-in;
+}
+
+/* Logo 样式 */
+.logo-full {
+    width: 180px;
+    height: 45px;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 在小屏幕上隐藏完整 logo */
+@media (max-width: 768px) {
+    .logo-full {
+        display: none;
+    }
+} 

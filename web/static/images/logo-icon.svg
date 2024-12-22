@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+    <!-- 背景圆形 -->
+    <circle cx="25" cy="25" r="20" fill="#2684FF"/>
+    
+    <!-- 代码符号 -->
+    <path d="M18 25 L23 20 L21 18 L14 25 L21 32 L23 30 L18 25" fill="white"/>
+    <path d="M32 25 L27 20 L29 18 L36 25 L29 32 L27 30 L32 25" fill="white"/>
+</svg> 
